@@ -10,14 +10,14 @@ module.exports = {
     },
 
     'twitterAuth' : {
-        'consumerKey'       : 'your-consumer-key-here',
-        'consumerSecret'    : 'your-client-secret-here',
+        'consumerKey'       : '5P6t0RBgM9UtJtMxUdyO5Xg5K',
+        'consumerSecret'    : 'uBdmqBiaxaYHlvGdkosNwqUcmM7I07tWdLl518NZzuHNjxCefC',
         'callbackURL'       : 'http://localhost:8000/auth/twitter/callback'
     },
 
     'googleAuth' : {
-        'clientID'      : 'your-secret-clientID-here',
-        'clientSecret'  : 'your-client-secret-here',
+        'clientID'      : '875266097111-4fiss65a6hrl12lq2ivsrbsakov432tf.apps.googleusercontent.com',
+        'clientSecret'  : 'mQrtJ7RwFQySQCBQe455DdoM',
         'callbackURL'   : 'http://localhost:8000/auth/google/callback'
     }
 
