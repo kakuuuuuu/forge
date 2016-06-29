@@ -2,17 +2,17 @@
 
 // set up ======================================================================
 // get all the tools we need
-var express  = require('express');
-var app      = express();
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash    = require('connect-flash');
-var path = require('path');
+var express      = require('express');
+var app          = express();
+var mongoose     = require('mongoose');
+var passport     = require('passport');
+var flash        = require('connect-flash');
+var path         = require('path');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
-
+var cors         = require('cors')
 require('./server/config/mongoose.js');
 
 // configuration ===============================================================
@@ -22,7 +22,7 @@ require('./server/config/passport')(passport); // pass passport for configuratio
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
-
+app.use(cors());
 app.set('view engine', 'ejs'); // set up ejs for templating
 app.use(express.static(__dirname + "/client/static"))
 app.set('views', path.join(__dirname,'./client/views'));
@@ -33,8 +33,10 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./server/config/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-
+require('./server/config/routes.js')(app, passport, path); // load our routes and pass in our app and fully configured passport
+// app.get('/profile', function(req, res){
+//   res.sendFile(path.join(__dirname+'/static/dashboard.html'))
+// })
 // launch ======================================================================
 app.listen(8000,function(){
   console.log('Passport test on port 8000')

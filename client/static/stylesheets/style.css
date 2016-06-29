@@ -1,0 +1,105 @@
+* {
+margin:0;
+padding:0;
+border:0;
+font-family: Helvetica, sans-serif;
+-webkit-text-size-adjust:none;
+}
+@font-face {
+  font-family: uranium;
+  src: url('../fonts/URANIUM.ttf');
+}
+.uranium{
+  font-family: uranium;
+}
+body{
+  background-color: black;
+}
+#header{
+  height: 270px;
+  background-color: #CBC9C9;
+  border-radius: 8px;
+}
+#profile{
+  background-color: #CBC9C9;
+  border-radius: 8px;
+}
+.button{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  cursor:pointer;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.logimg{
+  height: 50px;
+  width: 50px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#accountlinks{
+  margin-bottom: 20px;
+}
+#landing{
+  margin-top: 10%;
+}
+#regheader{
+  margin-top: 3%;
+  background-color: #CBC9C9;
+  border-radius: 8px;
+}
+#logheader{
+  margin-top: 5%;
+
+  background-color: #CBC9C9;
+  border-radius: 8px;
+}
+.error{
+  color:red;
+}
+.whitefont{
+  color:white;
+}
+.redfont{
+  color:red;
+}
+#userinfo{
+  background-color: #CBC9C9;
+  border-radius: 8px;
+}
+.pfpic{
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
+}
+#fbpic{
+  margin-left:0px;
+}
+#fbinfo{
+  margin-left: 20px;
+}
+#twitpic{
+  margin-left:0px;
+}
+#twitinfo{
+  margin-left: 20px;
+}
+#gpic{
+  margin-left:0px;
+}
+#ginfo{
+  margin-left: 20px;
+}
+.fbbutton{
+  background-color: #3b5998;
+}
+.twitbutton{
+  background-color: #55acee;
+}
+.googbutton{
+  background-color: #4CAF50;
+}
+.line{
+  border-bottom: groove;
+}

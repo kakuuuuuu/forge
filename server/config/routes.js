@@ -1,12 +1,17 @@
-module.exports = function(app, passport) {
+module.exports = function(app, passport, path) {
 
+    app.get('/getuser', function(req, res){
+        res.json(req.user)
+    })
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function(req, res) {
         res.render('index'); // load the index.ejs file
     });
-
+    app.post('/user', passport.authenticate('local-signup'), function(req, res){
+      res.json('/')
+    })
     // =====================================
     // LOGIN ===============================
     // =====================================
@@ -16,7 +21,7 @@ module.exports = function(app, passport) {
         // render the page and pass in any flash data if it exists
         res.render('login', { message: req.flash('loginMessage') });
     });
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/', passport.authenticate('facebook', { scope : 'email' }));
 
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
@@ -49,7 +54,8 @@ module.exports = function(app, passport) {
             passport.authenticate('google', {
                     successRedirect : '/profile',
                     failureRedirect : '/'
-            }));
+    }));
+
     // process the login form
     // app.post('/login', do all our passport stuff here);
 
@@ -81,9 +87,10 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile', {
-            user : req.user // get the user out of session and pass to template
-        });
+      res.sendFile('dashboard.html', {root: './client/static'})
+        // res.render('profile', {
+        //     user : req.user // get the user out of session and pass to template
+        // });
     });
     // =============================================================================
     // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
@@ -135,12 +142,55 @@ module.exports = function(app, passport) {
                 successRedirect : '/profile',
                 failureRedirect : '/'
             }));
+    // =============================================================================
+    // UNLINK ACCOUNTS =============================================================
+    // =============================================================================
+    // used to unlink accounts. for social accounts, just remove the token
+    // for local account, remove email and password
+    // user account will stay active in case they want to reconnect in the future
+
+        // local -----------------------------------
+        app.get('/unlink/local', function(req, res) {
+            var user            = req.user;
+            user.local.email    = undefined;
+            user.local.password = undefined;
+            user.save(function(err) {
+                res.redirect('/profile');
+            });
+        });
+
+        // facebook -------------------------------
+        app.get('/unlink/facebook', function(req, res) {
+            var user            = req.user;
+            user.facebook.token = undefined;
+            user.save(function(err) {
+                res.redirect('/profile');
+            });
+        });
+
+        // twitter --------------------------------
+        app.get('/unlink/twitter', function(req, res) {
+            var user           = req.user;
+            user.twitter.token = undefined;
+            user.save(function(err) {
+               res.redirect('/profile');
+            });
+        });
+
+        // google ---------------------------------
+        app.get('/unlink/google', function(req, res) {
+            var user          = req.user;
+            user.google.token = undefined;
+            user.save(function(err) {
+               res.redirect('/profile');
+            });
+        });
     // =====================================
     // LOGOUT ==============================
     // =====================================
     app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
+      req.logout();
+      res.redirect('/')
     });
 };
 

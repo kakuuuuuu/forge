@@ -3,25 +3,23 @@
 <html>
 <head>
     <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='stylesheets/style.css' />
 </head>
 <body>
-<div class="container">
+<div id='landing' class="row">
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
-
-        <p>Login or Register with:</p>
-
-        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+    <div id='header' class="col s6 offset-s3 center-align">
+        <h1 class='uranium'>Black Market</h1>
+        <div id='accountlinks' class='col s12'>
+          <a href='/login' class='btn blue-grey darken-1'>Sign In</a>
+          <a href='/signup' class='btn blue-grey darken-1'>Sign Up</a>
+        </div>
+        <a href="/auth/facebook"><img class='logimg' src='images/facebook.png' alt='facebook' /></a>
+        <a href="/auth/twitter"><img class='logimg' src='images/twitter.png' alt='twitter' /></a>
+        <a href="/auth/google"><img class='logimg' src='images/google.png' alt='google' /></a>
     </div>
 
 </div>

@@ -1,0 +1,47 @@
+<div ng-controller='profileController' class='row'>
+  <h1 class='whitefont uranium center-align'>Profile</h1>
+  <button class='btn' ng-click='logout()'>Logout</button>
+  <div id='userinfo' class='col s5'>
+    <h4>User Information</h4>
+    <p>Name: <span ng-bind='user.local.name'></span></p>
+    <p>Email: <span ng-bind='user.local.email'></span></p>
+    <h4 ng-if='user.facebook'>Facebook</h4>
+    <div ng-if='user.facebook' class='row'>
+      <div class='valign-wrapper'>
+        <div id='fbpic' class='col s1 valign'>
+          <img class='pfpic' ng-src='{{user.facebook.picture}}' alt='facebookpic'>
+        </div>
+        <div id='fbinfo' class='col s6 valign'>
+          <p ng-if='user.facebook'>Name: <span ng-bind='user.facebook.name'></span></p>
+          <p ng-if='user.facebook'>Email: <span ng-bind='user.facebook.email'></span></p>
+        </div>
+      </div>
+    </div>
+    <h4 ng-if='user.twitter'>Twitter</h4>
+    <div ng-if='user.twitter' class='row'>
+      <div class='valign-wrapper'>
+        <div id='twitpic' class='col s1 valign'>
+          <img class='pfpic' ng-src='{{user.twitter.picture}}' alt='twitterpic'>
+        </div>
+        <div id='twitinfo' class='col s6 valign'>
+          <p ng-if='user.twitter'>Name: <span ng-bind='user.twitter.name'></span></p>
+          <p ng-if='user.twitter'>Email: <span ng-bind='user.twitter.email'></span></p>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <h4 ng-if='user.google'>Google</h4>
+    <div ng-if='user.google' class='row'>
+      <div class='valign-wrapper'>
+        <div id='gpic' class='col s1 valign'>
+          <img class='pfpic' ng-src='{{user.google.picture}}' alt='googlepic'>
+        </div>
+        <div id='ginfo' class='col s6 valign'>
+          <p ng-if='user.google'>Name: <span ng-bind='user.google.name'></span></p>
+          <p ng-if='user.google'>Email: <span ng-bind='user.google.email'></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
