@@ -24,6 +24,8 @@ market_module.controller('streamsController', function($scope, userFactory, stre
     })
     console.log(game.name)
     streamFactory.search(game, function(streamer,game){
+      console.log('streamer '+streamer)
+      $scope.streamgame = game.name
       $scope.streamer = streamer;
       console.log($scope.streamer)
       element.html("<iframe src='http://player.twitch.tv?channel={"+$scope.streamer+"}' height='400' width='100%'  frameborder='0' scrolling='no' allowfullscreen='true'></iframe>")
