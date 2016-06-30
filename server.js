@@ -14,6 +14,12 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var cors         = require('cors')
 require('./server/config/mongoose.js');
+amazon = require('amazon-product-api');
+var client = amazon.createClient({
+  awsId: "AKIAIXU7Q7BS33F4KYEQ",
+  awsSecret: "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",
+  awsTag: "tsuyemura-20"
+});
 
 // configuration ===============================================================
 require('./server/config/passport')(passport); // pass passport for configuration
@@ -21,7 +27,8 @@ require('./server/config/passport')(passport); // pass passport for configuratio
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+app.use(bodyParser.urlencoded()); // get information from html forms
+app.use(bodyParser.json());
 app.use(cors());
 app.set('view engine', 'ejs'); // set up ejs for templating
 app.use(express.static(__dirname + "/client/static"))
@@ -33,7 +40,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./server/config/routes.js')(app, passport, path); // load our routes and pass in our app and fully configured passport
+require('./server/config/routes.js')(app, passport, path, client); // load our routes and pass in our app and fully configured passport
 // app.get('/profile', function(req, res){
 //   res.sendFile(path.join(__dirname+'/static/dashboard.html'))
 // })

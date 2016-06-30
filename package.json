@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kakuuuuuu/Passport-Test-w-Facbook#readme",
   "dependencies": {
+    "amazon-product-api": "^0.3.10",
     "bcrypt-nodejs": "latest",
     "body-parser": "^1.0.0",
     "bson": "^0.4.23",
@@ -28,7 +29,7 @@
     "express": "^4.0.0",
     "express-session": "^1.0.0",
     "method-override": "^1.0.0",
-    "mongoose": "^3.8.40",
+    "mongoose": "~3.8.40",
     "morgan": "^1.0.0",
     "passport": "^0.1.17",
     "passport-facebook": "^1.0.2",

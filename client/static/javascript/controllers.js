@@ -4,21 +4,70 @@ market_module.controller('registerController', function($scope, userFactory, $lo
     console.log($scope.user)
   })
 })
-market_module.controller('profileController', function($scope, userFactory, $location){
-  $scope.logout = function(){
-    $location.url('/')
+market_module.controller('streamsController', function($scope, userFactory, streamFactory, $routeParams){
+  var element = angular.element(document.querySelector('#stream'));
 
+  // element.html("<iframe src="+$scope.topStream+" height='400' width='680' frameborder='0' scrolling='no' allowfullscreen='true'></iframe>")
+  $scope.gameSearch = function(data){
+    $scope.options=[];
+    console.log('hi')
+    streamFactory.gameSearch($scope.newSearch, function(games){
+      $scope.games = games;
+      })
 
   }
-  if("user" in localStorage){
-    //grabs current user from localStorage if logged in
-    $scope.user = JSON.parse(localStorage.user);
-    console.log($scope.user)
-  }
-  else {
-    //redirects if user is not logged in
-   $location.url('/')
+  $scope.search = function(game){
+    $scope.games = {games:[game]}
+    console.log(game)
+    streamFactory.amazon(game, function(data){
+      $scope.options=data;
+    })
+    console.log(game.name)
+    streamFactory.search(game, function(streamer,game){
+      $scope.streamer = streamer;
+      console.log($scope.streamer)
+      element.html("<iframe src='http://player.twitch.tv?channel={"+$scope.streamer+"}' height='400' width='100%'  frameborder='0' scrolling='no' allowfullscreen='true'></iframe>")
+      console.log(game)
+
+    })
+
   }
 
-  console.log($scope.user.local.email)
 })
+function xmlToJson(xml) {
+
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+};

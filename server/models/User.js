@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var Schema = mongoose.Schema;
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
@@ -30,7 +31,8 @@ var userSchema = mongoose.Schema({
         name         : String,
         picture      : String,
         url          : String,
-    }
+    },
+    wishlist: [{type: Schema.Types.ObjectId, ref: 'Product'}]
 
 });
 

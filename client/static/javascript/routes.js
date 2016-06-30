@@ -3,19 +3,10 @@ var market_module = angular.module('black_market', ['ngRoute', 'ngStorage'])
 market_module.config(function ($routeProvider) {
       $routeProvider
         .when('/',{
-            templateUrl: 'partials/landing.html'
+          templateUrl: 'partials/profile.html'
         })
-        .when('/login',{
-            templateUrl: 'partials/login.html'
-        })
-        .when('/register',{
-            templateUrl: 'partials/register.html'
-        })
-        .when('/profile',{
-            templateUrl: 'partials/profile.html'
-        })
-        .when('/connect',{
-            templateUrl: 'partials/connect-local.html'
+        .when('/search',{
+          templateUrl: 'partials/search.html'
         })
         .otherwise({
           redirectTo: '/'

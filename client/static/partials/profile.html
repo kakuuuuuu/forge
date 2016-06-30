@@ -1,46 +1,63 @@
-<div ng-controller='profileController' class='row'>
-  <h1 class='whitefont uranium center-align'>Profile</h1>
-  <button class='btn' ng-click='logout()'>Logout</button>
-  <div id='userinfo' class='col s5'>
-    <h4>User Information</h4>
-    <p>Name: <span ng-bind='user.local.name'></span></p>
-    <p>Email: <span ng-bind='user.local.email'></span></p>
-    <h4 ng-if='user.facebook'>Facebook</h4>
-    <div ng-if='user.facebook' class='row'>
-      <div class='valign-wrapper'>
-        <div id='fbpic' class='col s1 valign'>
-          <img class='pfpic' ng-src='{{user.facebook.picture}}' alt='facebookpic'>
-        </div>
-        <div id='fbinfo' class='col s6 valign'>
-          <p ng-if='user.facebook'>Name: <span ng-bind='user.facebook.name'></span></p>
-          <p ng-if='user.facebook'>Email: <span ng-bind='user.facebook.email'></span></p>
-        </div>
-      </div>
-    </div>
-    <h4 ng-if='user.twitter'>Twitter</h4>
-    <div ng-if='user.twitter' class='row'>
-      <div class='valign-wrapper'>
-        <div id='twitpic' class='col s1 valign'>
-          <img class='pfpic' ng-src='{{user.twitter.picture}}' alt='twitterpic'>
-        </div>
-        <div id='twitinfo' class='col s6 valign'>
-          <p ng-if='user.twitter'>Name: <span ng-bind='user.twitter.name'></span></p>
-          <p ng-if='user.twitter'>Email: <span ng-bind='user.twitter.email'></span></p>
-        </div>
-      </div>
-      <hr>
-    </div>
+<div class='row'>
+  <div class='col s4 offset-s6' style='margin-top: 20px;'>
+    <a href='/logout' target='_self' class='btn waves-effect red'>Logout</a><a href='#/search' class='btn waves-effect green'>Search</a>
+  </div>
+</div>
+<div ng-controller='registerController' id='landing' class='row'>
 
-    <h4 ng-if='user.google'>Google</h4>
-    <div ng-if='user.google' class='row'>
-      <div class='valign-wrapper'>
-        <div id='gpic' class='col s1 valign'>
-          <img class='pfpic' ng-src='{{user.google.picture}}' alt='googlepic'>
+  <div id='profile' class='col s6 offset-s3'>
+
+
+    <div class='row'>
+      <h1 class='uranium center-align'>Dashboard</h1>
+      <div class='col s12'>
+        <h3>User Information</h3>
+        <p class='flow-text'>
+          Name: <span ng-bind='user.local.name'></span><br />
+          Email: <span ng-bind='user.local.email'></span>
+        </p>
+        <div class='line' ng-if='user.facebook || user.twitter || user.google'>
         </div>
-        <div id='ginfo' class='col s6 valign'>
-          <p ng-if='user.google'>Name: <span ng-bind='user.google.name'></span></p>
-          <p ng-if='user.google'>Email: <span ng-bind='user.google.email'></span></p>
+        <h5 class='valign-wrapper cyan-text text-darken-3' ng-if='user.facebook'><img class='logimg valign' src='../images/facebook.png' alt='facebook'/><span class='valign'>Facebook</span></h5>
+        <div ng-if='user.facebook' class='row valign-wrapper'>
+          <div id='fbpic' class='col s1 valign'>
+            <img class='pfpic' ng-src='{{user.facebook.picture}}' alt='fbprofile'/>
+          </div>
+          <p id='fbinfo' ng-if='user.facebook' class='flow-text col s8 valign'>
+            Name: <a ng-href='{{user.facebook.url}}'><span ng-bind='user.facebook.name'></span></a><br />
+            Email: <span ng-bind='user.facebook.email'></span>
+          </p>
         </div>
+        <div class='line' ng-if='user.twitter || user.google'>
+        </div>
+        <h5 class='valign-wrapper cyan-text' ng-if='user.twitter'><img class='logimg valign' src='../images/twitter.png' alt='twitter'/><span class='valign'>Twitter</span></h5>
+        <div ng-if='user.twitter' class='row valign-wrapper'>
+          <div id='twitpic' class='col s1 valign'>
+            <img class='pfpic' ng-src='{{user.twitter.picture}}' alt='tprofile'/>
+          </div>
+          <p id='twitinfo' ng-if='user.twitter' class='flow-text col s8 valign'>
+            Name: <span ng-bind='user.twitter.displayName'></span><br />
+            <a ng-href='http://twitter.com/{{user.twitter.username}}'>@<span ng-bind='user.twitter.username'></span></a>
+          </p>
+        </div>
+        <div class='line' ng-if='user.google'>
+        </div>
+        <h5 class='valign-wrapper red-text text-lighten-2' ng-if='user.google'><img class='logimg valign' src='../images/google.png' alt='google'/><span class='valign'>Google+</span></h5>
+        <div ng-if='user.google' class='row valign-wrapper'>
+          <div id='gpic' class='col s1 valign'>
+            <img class='pfpic' ng-src='{{user.google.picture}}' alt='gprofile'/>
+          </div>
+          <p id='ginfo' ng-if='user.google' class='flow-text col s8 valign'>
+            Name: <a ng-href='{{user.google.url}}'><span ng-bind='user.google.name'></span></a><br />
+            Email: <span ng-bind='user.google.email'></span><br />
+          </p>
+        </div>
+      </div>
+      <div ng-if='!user.local || !user.facebook || !user.twitter || !user.google' class='col s12'>
+        <a ng-if='!user.local' href='/connect/local' class='btn green lighten-1'>Create Local</a><br />
+        <a ng-if='!user.facebook' href='/connect/facebook' class='btn fbbutton'>Connect Facebook</a><br />
+        <a ng-if='!user.twitter' href='/connect/twitter' class='btn cyan accent-1'>Connect Twitter</a><br />
+        <a ng-if='!user.google' href='/connect/google' class='btn red lighten-3'>Connect Google</a><br />
       </div>
     </div>
   </div>

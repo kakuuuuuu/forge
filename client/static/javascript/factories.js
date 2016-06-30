@@ -8,62 +8,29 @@ market_module.factory('userFactory', function($http, $location, $window){
       callback(user)
     })
   }
-  factory.register = function(info){
-    $http.post('/register',info).success(function($http){
-      if($http.status==false){
-        error.push($http.error)
-      }
-      else{
-        console.log('success')
-        localStorage.user = JSON.stringify($http);
-        console.log(JSON.parse(localStorage.user))
-        console.log($http)
-        error.pop();
-        $location.url('/profile')
-      }
+  return factory;
+})
+market_module.factory('streamFactory', function($http, $location){
+  var streams = [];
+  var factory = {};
+  factory.gameSearch = function(search, callback){
+    $http.get('https://api.twitch.tv/kraken/search/games?q=' + search + '&type=suggest').success(function(http){
+      callback(http)
     })
   }
-  factory.login = function(info){
-    $http.post('/login', info).success(function($http){
-      if($http.status == false){
-        error.push($http.error)
-      }
-      else{
-        localStorage.user = JSON.stringify($http);
-        error.pop();
-        $location.url('/profile')
-      }
+  factory.search = function(game, callback){
+    $http.get('https://api.twitch.tv/kraken/streams?game=' + game.name).success(function(http){
+      console.log(http.streams[0].channel.name)
+      callback(http.streams[0].channel.name, game)
     })
   }
-  factory.getError = function(){
-    return error;
-  }
-  factory.facebook = function() {
-    // $http.get('/auth/facebook').success(function(output){
-    //   localStorage.user = JSON.stringify(output);
-    //   $location.url('/profile')
-    // })
-
-        $http({
-          url: '/auth/facebook',
-          method: 'GET',
-          withCredentials: true,
-          headers: {
-            'Access-Control-Allow-Origin': true,
-            'Content-Type': 'application/json; charset=utf-8'
-          }
-        }).then(function(){
-          $location.url('/profile')
-        })
-    };
-  factory.twitter = function(){
-    $http.get('/auth/twitter').success(function(output){
-      localStorage.user = JSON.stringify(output);
-      $location.url('/profile')
+  factory.amazon = function(game, callback){
+    info={name:game.name}
+    console.log(info)
+    $http.post('/searchgames',info).success(function($http){
+      console.log($http);
+      callback($http)
     })
   }
-//   factory.facebook = function() {
-//     $window.location = $window.location.protocol + "//" + $window.location.host + $window.location.pathname + "auth/facebook";
-// };
   return factory;
 })
