@@ -1,16 +1,16 @@
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <div ng-controller='streamsController'>
-  <div class='col s4 offset-s6' style='margin-top: 20px;'>
+  <div class='col s12 m4 offset-m6' style='margin-top: 20px;'>
     <a href='/logout' target='_self' class='btn waves-effect red'>Logout</a><a href='#/' class='btn waves-effect green'>Back</a>
   </div>
   <div class='row'>
     <h2 class='uranium center-align whitefont'>Search the Forge</h2>
   </div>
   <div class='row'>
-    <div class='col s4 twitter'>
+    <div class='col s12 m4 twitter'>
 			<a class="twitter-timeline" href="https://twitter.com/Le_Forge_/lists/gamedeals1">A Twitter List by Le Forge</a>
 		</div>
-    <div class='col s8'>
+    <div class='col s12 m8'>
       <h5 ng-if='streamer' class='whitefont uranium'>Top Streamer for <span class='uranium' ng-bind='stream'></span> - <span class='uranium' ng-bind='streamer'></span></h5>
       <h5 ng-if='!streamer' class='whitefont uranium center-align'>No Stream Available</h5>
       <h5 ng-if='!streamer' class='whitefont uranium center-align'>Please Select Game to Find a Stream</h5>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class='row'>
-    <div class='col s6 m12 offset-s3'>
+    <div class='col s12 m12 offset-s3'>
       <form ng-submit='gameSearch()'>
         <div class='input-field'>
           <input class='whitefont' type='text' ng-model='newSearch' />
@@ -32,26 +32,26 @@
   </div>
   <h3 ng-if='!games' class='whitefont uranium center-align'>Search for Games</h3>
   <div ng-if='games' class='row'>
-    <div class='col s12 m12 center-align'>
+    <div class='col s12 m12 l12 center-align'>
       <h3 ng-if='games.games.length==0' class='whitefont uranium'>No Matches</h3>
       <h3 ng-if='games.games.length>1' class='whitefont uranium'>Games on Twitch</h3>
       <h3 ng-if='games.games.length==1' class='whitefont uranium'>Selected Game - <span class='uranium' ng-bind='games.games[0].name'></span></h3>
     </div>
-    <div style='margin-bottom: 20px;' ng-repeat='game in games.games' class='col s4 m12 row game' ng-animate="'animate'">
-      <div class='col s4 m4'>
+    <div style='margin-bottom: 20px;' ng-repeat='game in games.games' class='col s12 m4 row game' ng-animate="'animate'">
+      <div class='col s4 m3'>
         <img ng-click='search(game)' ng-src='{{game.box.medium}}' alt='gameart' />
       </div>
       <div class='col s6 m6' style='margin-left: 5px;'>
         <p ng-hide='games.games.length==1' ng-bind='game.name' class='whitefont flow-text'></p>
       </div>
-      <div class='col s12 m12 center-align'>
-        <button ng-hide='games.games.length==1' ng-click='search(game)' class='col s8 btn red'>Preview</button>
+      <div class='col s6 m12 row'>
+        <button ng-hide='games.games.length==1' ng-click='search(game)' class='col s6 m3 btn red'>Preview</button>
       </div>
     </div>
   </div>
   <div ng-if='options.length>0' class='row'>
     <h3 class='whitefont uranium'><i class="whitefont medium material-icons">shopping_cart</i> Amazon Suggestions</h3>
-    <div class='col s4 m6 amazon' ng-repeat='option in options'>
+    <div class='col s12 m3 amazon' ng-repeat='option in options'>
       <a class='whitefont' ng-href='{{option.DetailPageURL[0]}}' target="_blank"><img class='amzimg' ng-src='{{option.MediumImage[0].URL[0]}}' alt='amazonimg'/></a>
       <a ng-href='{{option.DetailPageURL[0]}}' target="_blank"><p class='flow-text whitefont' ng-bind='option.ItemAttributes[0].Title[0]'></p></a>
       <p class='flow-text whitefont'>Starting at: <span ng-bind='option.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0]'></span></p>
