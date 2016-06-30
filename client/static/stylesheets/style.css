@@ -138,5 +138,6 @@ body{
   height: 370px;
 }
 .amzimg{
+  border-radius: 5px;
   height: 150px;
 }

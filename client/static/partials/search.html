@@ -1,5 +1,8 @@
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <div ng-controller='streamsController'>
+  <div class='col s4 offset-s6' style='margin-top: 20px;'>
+    <a href='/logout' target='_self' class='btn waves-effect red'>Logout</a><a href='#/' class='btn waves-effect green'>Back</a>
+  </div>
   <div class='row'>
     <h2 class='uranium center-align whitefont'>Search the Forge</h2>
   </div>
@@ -7,8 +10,13 @@
     <div class='col s4 twitter'>
 			<a class="twitter-timeline" href="https://twitter.com/Le_Forge_/lists/gamedeals1">A Twitter List by Le Forge</a>
 		</div>
-    <div class='col s8' id='stream'>
+    <div class='col s8'>
+      <h5 ng-if='streamer' class='whitefont uranium'>Top Streamer for <span class='uranium' ng-bind='games.games[0].name'></span> - <span class='uranium' ng-bind='streamer'></span></h5>
+      <h5 ng-if='!streamer' class='whitefont uranium center-align'>No Stream Available</h5>
+      <h5 ng-if='!streamer' class='whitefont uranium center-align'>Please Select Game to Find a Stream</h5>
+      <div id='stream'>
 
+      </div>
     </div>
   </div>
   <div class='row'>
@@ -21,9 +29,13 @@
       </form>
     </div>
   </div>
+  <h3 ng-if='!games' class='whitefont uranium center-align'>Search for Games</h3>
   <div ng-if='games' class='row'>
-    <h3 ng-if='games.games.length>1' class='whitefont uranium'>Games Streamed on Twitch</h3>
-    <h3 ng-if='games.games.length==1' class='whitefont uranium'>Selected Game - <span class='uranium' ng-bind='games.games[0].name'></span></h3>
+    <div class='col s12 center-align'>
+      <h3 ng-if='games.games.length==0' class='whitefont uranium'>No Matches</h3>
+      <h3 ng-if='games.games.length>1' class='whitefont uranium'>Games on Twitch</h3>
+      <h3 ng-if='games.games.length==1' class='whitefont uranium'>Selected Game - <span class='uranium' ng-bind='games.games[0].name'></span></h3>
+    </div>
     <div style='margin-bottom: 20px;' ng-repeat='game in games.games' class='col s4 row game' ng-animate="'animate'">
       <div class='col s4'>
         <img ng-click='search(game)' ng-src='{{game.box.medium}}' alt='gameart' />
