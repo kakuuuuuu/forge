@@ -23,21 +23,21 @@
   </div>
   <div ng-if='games' class='row'>
     <h3 ng-if='games.games.length>1' class='whitefont uranium'>Games Streamed on Twitch</h3>
-    <h3 ng-if='games.games.length==1' class='whitefont uranium'>Selected Game</h3>
+    <h3 ng-if='games.games.length==1' class='whitefont uranium'>Selected Game - <span class='uranium' ng-bind='games.games[0].name'></span></h3>
     <div style='margin-bottom: 20px;' ng-repeat='game in games.games' class='col s4 row game' ng-animate="'animate'">
       <div class='col s4'>
         <img ng-click='search(game)' ng-src='{{game.box.medium}}' alt='gameart' />
       </div>
       <div class='col s6' style='margin-left: 5px;'>
-        <p ng-bind='game.name' class='whitefont flow-text'></p>
+        <p ng-hide='games.games.length==1' ng-bind='game.name' class='whitefont flow-text'></p>
       </div>
       <div class='col s12 center-align'>
-        <button ng-click='search(game)' class='col s8 btn red'>Preview</button>
+        <button ng-hide='games.games.length==1' ng-click='search(game)' class='col s8 btn red'>Preview</button>
       </div>
     </div>
   </div>
   <div ng-if='options.length>0' class='row'>
-    <h3 class='whitefont uranium'>Amazon Buying Options</h3>
+    <h3 class='whitefont uranium'><i class="whitefont medium material-icons">shopping_cart</i> Amazon Suggestions</h3>
     <div class='col s4 amazon' ng-repeat='option in options'>
       <a class='whitefont' ng-href='{{option.DetailPageURL[0]}}' target="_blank"><img class='amzimg' ng-src='{{option.MediumImage[0].URL[0]}}' alt='amazonimg'/></a>
       <a ng-href='{{option.DetailPageURL[0]}}' target="_blank"><p class='flow-text whitefont' ng-bind='option.ItemAttributes[0].Title[0]'></p></a>
