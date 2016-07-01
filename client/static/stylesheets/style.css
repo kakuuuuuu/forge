@@ -143,8 +143,14 @@ body{
          -4px 4px purple,
          -5px 5px purple;
 }
+.gameimg{
+  opacity: 0.6;
+}
+.gameimg:hover{
+  opacity: 1;
+}
 .amazon{
-  height: 370px;
+  height: 380px;
   width: 90%;
   background-color: #CBC9C9;
   opacity: 0.5;
@@ -164,13 +170,23 @@ body{
 .amzimg{
   border-radius: 5px;
   height: 50%;
-  max-width: 70%
+  max-width: 70%;
+  margin-bottom: 5px;
 }
 .amztext{
   width: 90%;
   height: 30%;
+  text-decoration: underline;
 
 }
 .blackfont{
   color: black;
+  font-weight: bold;
+}
+.heads{
+  font-weight: 600;
+  font-style: italic;
+}
+.thin{
+  font-weight: 100;
 }

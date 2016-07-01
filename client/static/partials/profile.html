@@ -1,7 +1,13 @@
 <div class='row'>
-  <div class='col s4 offset-s6' style='margin-top: 20px;'>
-    <a href='/logout' target='_self' class='btn waves-effect red'>Logout</a><a href='#/search' class='btn waves-effect green'>Search</a>
-  </div>
+  <nav>
+    <div class="nav-wrapper grey darken-3">
+      <a href="#/" class="brand-logo uranium">Forge</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class='thin btn-large deep-orange darken-4' href="#/search">Search Games</a></li>
+        <li><a class='thin' href="/logout" target='_self'>Logout</a></li>
+      </ul>
+    </div>
+  </nav>
 </div>
 <div ng-controller='registerController' id='landing' class='row'>
 
