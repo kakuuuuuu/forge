@@ -24,7 +24,7 @@
         </p>
         <div class='line' ng-if='user.facebook || user.twitter || user.google'>
         </div>
-        <h5 class='valign-wrapper cyan-text text-darken-3' ng-if='user.facebook'><img class='logimg valign' src='../images/facebook.png' alt='facebook'/><span class='valign'>Facebook</span></h5>
+        <h5 class='valign-wrapper cyan-text text-darken-3' ng-if='user.facebook'><img class='logimg valign' src='../images/facebook.png' alt='facebook'/><span class='valign thin'>Facebook</span></h5>
         <div ng-if='user.facebook' class='row valign-wrapper'>
           <div id='fbpic' class='col s1 valign'>
             <img class='pfpic' ng-src='{{user.facebook.picture}}' alt='fbprofile'/>
@@ -36,7 +36,7 @@
         </div>
         <div class='line' ng-if='user.twitter || user.google'>
         </div>
-        <h5 class='valign-wrapper cyan-text' ng-if='user.twitter'><img class='logimg valign' src='../images/twitter.png' alt='twitter'/><span class='valign'>Twitter</span></h5>
+        <h5 class='valign-wrapper cyan-text' ng-if='user.twitter'><img class='logimg valign' src='../images/twitter.png' alt='twitter'/><span class='valign thin'>Twitter</span></h5>
         <div ng-if='user.twitter' class='row valign-wrapper'>
           <div id='twitpic' class='col s1 valign'>
             <img class='pfpic' ng-src='{{user.twitter.picture}}' alt='tprofile'/>
@@ -48,7 +48,7 @@
         </div>
         <div class='line' ng-if='user.google'>
         </div>
-        <h5 class='valign-wrapper red-text text-lighten-2' ng-if='user.google'><img class='logimg valign' src='../images/google.png' alt='google'/><span class='valign'>Google+</span></h5>
+        <h5 class='valign-wrapper red-text text-lighten-2' ng-if='user.google'><img class='logimg valign' src='../images/google.png' alt='google'/><span class='valign thin'>Google+</span></h5>
         <div ng-if='user.google' class='row valign-wrapper'>
           <div id='gpic' class='col s1 valign'>
             <img class='pfpic' ng-src='{{user.google.picture}}' alt='gprofile'/>

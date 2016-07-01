@@ -16,14 +16,16 @@ market_module.controller('streamsController', function($scope, userFactory, stre
   }
   $scope.search = function(game){
     $scope.games = {games:[game]}
-    $scope.streamgame = game.name
+
     streamFactory.amazon(game, function(data){
       $scope.options=data;
     })
     streamFactory.search(game, function(streamer,game){
-      $scope.streamer = streamer;
-      element.html("<iframe src='http://player.twitch.tv?channel={"+$scope.streamer+"}' height='400' width='100%'  frameborder='0' scrolling='no' allowfullscreen='true'></iframe>")
-
+      if(streamer!='nothing'){
+        $scope.streamer = streamer;
+        element.html("<iframe src='http://player.twitch.tv?channel={"+$scope.streamer+"}' height='400' width='100%'  frameborder='0' scrolling='no' allowfullscreen='true'></iframe>")
+        $scope.streamgame = game.name
+      }
     })
 
   }
