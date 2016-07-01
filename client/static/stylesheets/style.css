@@ -24,6 +24,9 @@ body{
   background-color: #CBC9C9;
   border-radius: 8px;
 }
+.title{
+  margin-left: 6px;
+}
 .button{
   background-color: Transparent;
   background-repeat:no-repeat;
@@ -132,16 +135,22 @@ body{
   top: -50px;
   height: 0px;
 }
+#twitchhead{
+  border: 3px solid #7e57c2;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-style: oblique;
+}
 .game{
   height: 320px;
   border-radius: 5px;
   padding: 10px;
-    border: 1px solid purple;
-    box-shadow:  -1px 1px purple,
-         -2px 2px purple,
-         -3px 3px purple,
-         -4px 4px purple,
-         -5px 5px purple;
+    border: 1px solid #7e57c2;
+    box-shadow:  -1px 1px #7e57c2,
+         -2px 2px #7e57c2,
+         -3px 3px #7e57c2,
+         -4px 4px #7e57c2,
+         -5px 5px #7e57c2;
 }
 .gameimg{
   opacity: 0.6;
@@ -156,12 +165,12 @@ body{
   opacity: 0.5;
   border-radius: 5px;
   padding: 10px;
-    border: 1px solid yellow;
-    box-shadow:  -1px 1px yellow,
-         -2px 2px yellow,
-         -3px 3px yellow,
-         -4px 4px yellow,
-         -5px 5px yellow;
+    border: 1px solid #ffa000;
+    box-shadow:  -1px 1px #ffa000,
+         -2px 2px #ffa000,
+         -3px 3px #ffa000,
+         -4px 4px #ffa000,
+         -5px 5px #ffa000;
   margin-bottom: 8px;
 }
 .amazon:hover{
@@ -184,9 +193,11 @@ body{
   font-weight: bold;
 }
 .heads{
-  font-weight: 600;
-  font-style: italic;
+  font-weight: 200;
 }
 .thin{
   font-weight: 100;
+}
+.twitchbtn{
+  vertical-align:bottom
 }
