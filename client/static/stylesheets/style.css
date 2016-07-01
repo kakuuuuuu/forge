@@ -139,5 +139,8 @@ body{
 }
 .amzimg{
   border-radius: 5px;
-  height: 150px;
+  height: 50%;
+}
+.amztext{
+  height: 30%;
 }
