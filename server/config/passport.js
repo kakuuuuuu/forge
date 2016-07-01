@@ -11,9 +11,9 @@ var configAuth      = require('./auths');
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
+// ===============================================================================================================
+// PASSPORT SETUP ================================================================================================
+// ===============================================================================================================
     // required for persistent login sessions
     // passport needs ability to serialize and unserialize users out of session
 
@@ -21,7 +21,6 @@ module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
-
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         User.findById(id, function(err, user) {
@@ -29,9 +28,9 @@ module.exports = function(passport) {
         });
     });
 
-    // =========================================================================
-    // LOCAL SIGNUP ============================================================
-    // =========================================================================
+// ===============================================================================================================
+// REGISTER LOCAL ================================================================================================
+// ===============================================================================================================
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
@@ -51,7 +50,6 @@ module.exports = function(passport) {
         if(req.body.password == undefined || req.body.confirm == undefined){
           return done(null, false, req.flash('signupMessage', 'Password fields must be filled'));
         }
-
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
@@ -63,12 +61,10 @@ module.exports = function(passport) {
             // if there are any errors, return the error
             if (err)
                 return done(err);
-
             // check to see if theres already a user with that email
             if (user) {
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
             } else {
-
                 // if there is no user with that email
                 // create the user
                 var newUser            = new User();
@@ -84,12 +80,10 @@ module.exports = function(passport) {
                     return done(null, newUser);
                 });
             }
-
         });
       }
       else{
         var user            = req.user;
-
         // set the user's local credentials
         user.local.email    = email;
         user.local.name     = req.body.name
@@ -104,9 +98,9 @@ module.exports = function(passport) {
         });
 
     }));
-    // =========================================================================
-    // LOCAL LOGIN =============================================================
-    // =========================================================================
+// ===============================================================================================================
+// LOGIN LOCAL ===================================================================================================
+// ===============================================================================================================
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
@@ -138,11 +132,10 @@ module.exports = function(passport) {
         });
 
     }));
-    // =========================================================================
-    // FACEBOOK ================================================================
-    // =========================================================================
+// ===============================================================================================================
+// FACEBOOK PASSPORT =============================================================================================
+// ===============================================================================================================
     passport.use(new FacebookStrategy({
-
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
         clientSecret    : configAuth.facebookAuth.clientSecret,
@@ -150,7 +143,6 @@ module.exports = function(passport) {
         passReqToCallback : true, // allows us to pass in the req from our route (lets us check if a user is logged in or not)
         profileFields: ['email', 'name', 'picture', 'profileUrl']
     },
-
     // facebook will send back the token and profile
     function(req, token, refreshToken, profile, done) {
       console.log('here')
@@ -158,18 +150,14 @@ module.exports = function(passport) {
         console.log(profile.picture)
         // asynchronous
         process.nextTick(function() {
-
             // check if the user is already logged in
             if (!req.user) {
-
                 // find the user in the database based on their facebook id
                 User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-
                     // if there is an error, stop everything and return that
                     // ie an error connecting to the database
                     if (err)
                         return done(err);
-
                     // if the user is found, then log them in
                     if (user) {
                         return done(null, user); // user found, return that user
@@ -192,7 +180,6 @@ module.exports = function(passport) {
                         else{
                           // if there is no user found with that facebook id, create them
                           var newUser            = new User();
-
                           // set all of the facebook information in our user model
                           newUser.facebook.id    = profile.id; // set the users facebook id
                           newUser.facebook.token = token; // we will save the token that facebook provides to the user
@@ -204,21 +191,16 @@ module.exports = function(passport) {
                           newUser.save(function(err) {
                               if (err)
                                   throw err;
-
                               // if successful, return the new user
                               return done(null, newUser);
                           });
                         }
                       })
-
                     }
-
                 });
-
             } else {
                 // user already exists and is logged in, we have to link accounts
                 var user            = req.user; // pull the user out of the session
-
                 // update the current users facebook credentials
                 user.facebook.id    = profile.id;
                 user.facebook.token = token;
@@ -233,22 +215,18 @@ module.exports = function(passport) {
                     return done(null, user);
                 });
             }
-
         });
-
     }));
-    // =========================================================================
-    // TWITTER =================================================================
-    // =========================================================================
+// ===============================================================================================================
+// TWITTER PASSPORT =============================================================================================
+// ===============================================================================================================
     passport.use(new TwitterStrategy({
-
         consumerKey     : configAuth.twitterAuth.consumerKey,
         consumerSecret  : configAuth.twitterAuth.consumerSecret,
         callbackURL     : configAuth.twitterAuth.callbackURL,
         profileFields: ['email'],
         include_email: true,
         passReqToCallback : true,
-
     },
     function(req, token, tokenSecret, profile, done) {
       console.log(profile)
@@ -259,26 +237,22 @@ module.exports = function(passport) {
           if (!req.user) {
             console.log("no user")
             User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
-
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err)
                     return done(err);
-
                 // if the user is found then log them in
                 if (user) {
                     return done(null, user); // user found, return that user
                 } else {
                     // if there is no user, create them
                     var newUser                 = new User();
-
                     // set all of the user data that we need
                     newUser.twitter.id          = profile.id;
                     newUser.twitter.token       = token;
                     newUser.twitter.username    = profile.username;
                     newUser.twitter.displayName = profile.displayName;
                     newUser.twitter.picture     = profile.photos[0].value;
-
                     // save our user into the database
                     newUser.save(function(err) {
                         if (err)
@@ -303,14 +277,12 @@ module.exports = function(passport) {
                 return done(null, user);
             });
           }
-    });
-
+        });
     }));
-    // =========================================================================
-    // GOOGLE ==================================================================
-    // =========================================================================
+// ===============================================================================================================
+// GOOGLE PASSPORT =============================================================================================
+// ===============================================================================================================
     passport.use(new GoogleStrategy({
-
         clientID        : configAuth.googleAuth.clientID,
         clientSecret    : configAuth.googleAuth.clientSecret,
         callbackURL     : configAuth.googleAuth.callbackURL,
@@ -328,9 +300,7 @@ module.exports = function(passport) {
             User.findOne({ 'google.id' : profile.id }, function(err, user) {
                 if (err)
                     return done(err);
-
                 if (user) {
-
                     // if a user is found, log them in
                     return done(null, user);
                 } else {
@@ -342,7 +312,6 @@ module.exports = function(passport) {
                       user.google.email = profile.emails[0].value; // pull the first email
                       user.google.picture = profile._json.picture;
                       user.google.url = profile._json.link;
-
                       user.save(function(err) {
                           if (err)
                               throw err;
@@ -352,7 +321,6 @@ module.exports = function(passport) {
                     else{
                       // if the user isnt in our database, create a new user
                       var newUser          = new User();
-
                       // set all of the relevant information
                       newUser.google.id    = profile.id;
                       newUser.google.token = token;
@@ -368,13 +336,11 @@ module.exports = function(passport) {
                       });
                     }
                   })
-
                 }
             });
           }
           else{
             var user          = req.user;
-
             // set all of the relevant information
             user.google.id    = profile.id;
             user.google.token = token;
@@ -390,7 +356,5 @@ module.exports = function(passport) {
             });
           }
         });
-
     }));
-
 };
