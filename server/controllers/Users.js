@@ -3,7 +3,7 @@ module.exports = {
   getuser: function(req, res){
     res.json(req.user)
   },
-  amazonsearch: function(req, res){
+  amazonsearch: function(req, res, client){
     console.log('searching')
     console.log(req.body)
     client.itemSearch({

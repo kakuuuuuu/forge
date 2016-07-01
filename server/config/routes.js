@@ -7,7 +7,7 @@ module.exports = function(app, passport, path, client) {
         users.getuser(req, res)
     })
     app.post('/searchgames', function(req, res){
-        users.amazonsearch(req, res)
+        users.amazonsearch(req, res, client)
     })
 // ===============================================================================================================
 // HOMEPAGE ROUTES ===============================================================================================
