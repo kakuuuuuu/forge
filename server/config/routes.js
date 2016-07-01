@@ -1,4 +1,4 @@
-var users = require('../controllers/users.js');
+var users = require('../controllers/Users.js');
 module.exports = function(app, passport, path, client) {
 // ===============================================================================================================
 // API ROUTES ===============================================================================================
