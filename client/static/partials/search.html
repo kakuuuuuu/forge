@@ -37,24 +37,28 @@
       <h3 ng-if='games.games.length>1' class='whitefont uranium'>Games on Twitch</h3>
       <h3 ng-if='games.games.length==1' class='whitefont uranium'>Selected Game - <span class='uranium' ng-bind='games.games[0].name'></span></h3>
     </div>
-    <div style='margin-bottom: 20px;' ng-repeat='game in games.games' class='col s12 m4 row game' ng-animate="'animate'">
-      <div class='col s4 m3'>
-        <img ng-click='search(game)' ng-src='{{game.box.medium}}' alt='gameart' />
-      </div>
-      <div class='col s6 m9' style='margin-left: 5px;'>
-        <p ng-hide='games.games.length==1' ng-bind='game.name' class='whitefont flow-text'></p>
-      </div>
-      <div class='col s6 m12 row'>
-        <button ng-hide='games.games.length==1' ng-click='search(game)' class='col s6 m3 btn red'>Preview</button>
+    <div style='margin-bottom: 20px;' ng-repeat='game in games.games' class='col s12 m4 row' ng-animate="'animate'">
+      <div class='game'>
+        <div>
+          <img ng-click='search(game)' ng-src='{{game.box.medium}}' alt='gameart' />
+        </div>
+        <div style='margin-left: 5px;'>
+          <p ng-hide='games.games.length==1' ng-bind='game.name' class='whitefont flow-text'></p>
+        </div>
+        <div>
+          <button ng-hide='games.games.length==1' ng-click='search(game)' class='col btn red'>Preview</button>
+        </div>
       </div>
     </div>
   </div>
   <div ng-if='options.length>0' class='row'>
     <h3 class='whitefont uranium'><i class="whitefont medium material-icons">shopping_cart</i> Amazon Suggestions</h3>
-    <div class='col s12 m3 amazon' ng-repeat='option in options'>
-      <a class='whitefont' ng-href='{{option.DetailPageURL[0]}}' target="_blank"><img class='amzimg' ng-src='{{option.MediumImage[0].URL[0]}}' alt='amazonimg'/></a>
-      <a ng-href='{{option.DetailPageURL[0]}}' target="_blank"><p class='whitefont amztext' ng-bind='option.ItemAttributes[0].Title[0]'></p></a>
-      <p class='flow-text whitefont'>Starting at: <span ng-bind='option.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0]'></span></p>
+    <div class='col s12 m3' ng-repeat='option in options'>
+      <div class='amazon'>
+        <a ng-href='{{option.DetailPageURL[0]}}' target="_blank"><img class='amzimg' ng-src='{{option.MediumImage[0].URL[0]}}' alt='amazonimg'/></a>
+        <a class='blackfont' ng-href='{{option.DetailPageURL[0]}}' target="_blank"><p class='amztext' ng-bind='option.ItemAttributes[0].Title[0]'></p></a>
+        <p class='flow-text'>Starting at: <span ng-bind='option.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0]'></span></p>
+      </div>
     </div>
   </div>
 </div>

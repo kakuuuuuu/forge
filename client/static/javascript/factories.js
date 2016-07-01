@@ -20,15 +20,12 @@ market_module.factory('streamFactory', function($http, $location){
   }
   factory.search = function(game, callback){
     $http.get('https://api.twitch.tv/kraken/streams?game=' + game.name).success(function(http){
-      console.log(http.streams[0].channel.name)
       callback(http.streams[0].channel.name, game)
     })
   }
   factory.amazon = function(game, callback){
     info={name:game.name}
-    console.log(info)
     $http.post('/searchgames',info).success(function($http){
-      console.log($http);
       callback($http)
     })
   }

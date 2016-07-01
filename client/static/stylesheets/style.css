@@ -133,14 +133,40 @@ body{
   height: 0px;
 }
 .game{
+  height: 320px;
+  border-radius: 5px;
+  padding: 10px;
+    border: 1px solid purple;
+    box-shadow:  -1px 1px purple,
+         -2px 2px purple,
+         -3px 3px purple,
+         -4px 4px purple,
+         -5px 5px purple;
 }
 .amazon{
   height: 370px;
+  width: 80%;
+  background-color: #CBC9C9;
+  border-radius: 5px;
+  padding: 10px;
+    border: 1px solid yellow;
+    box-shadow:  -1px 1px yellow,
+         -2px 2px yellow,
+         -3px 3px yellow,
+         -4px 4px yellow,
+         -5px 5px yellow;
+  margin-bottom: 8px;
 }
 .amzimg{
   border-radius: 5px;
   height: 50%;
+  max-width: 70%
 }
 .amztext{
+  width: 90%;
   height: 30%;
+
+}
+.blackfont{
+  color: black;
 }
