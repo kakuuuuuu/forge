@@ -145,8 +145,9 @@ body{
 }
 .amazon{
   height: 370px;
-  width: 80%;
+  width: 90%;
   background-color: #CBC9C9;
+  opacity: 0.5;
   border-radius: 5px;
   padding: 10px;
     border: 1px solid yellow;
@@ -156,6 +157,9 @@ body{
          -4px 4px yellow,
          -5px 5px yellow;
   margin-bottom: 8px;
+}
+.amazon:hover{
+  opacity: 1;
 }
 .amzimg{
   border-radius: 5px;

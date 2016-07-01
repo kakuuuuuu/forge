@@ -56,8 +56,8 @@
     <div class='col s12 m3' ng-repeat='option in options'>
       <div class='amazon'>
         <a ng-href='{{option.DetailPageURL[0]}}' target="_blank"><img class='amzimg' ng-src='{{option.MediumImage[0].URL[0]}}' alt='amazonimg'/></a>
-        <a class='blackfont' ng-href='{{option.DetailPageURL[0]}}' target="_blank"><p class='amztext' ng-bind='option.ItemAttributes[0].Title[0]'></p></a>
-        <p class='flow-text'>Starting at: <span ng-bind='option.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0]'></span></p>
+        <a class='blackfont' ng-href='{{option.DetailPageURL[0]}}' target="_blank"><p class='amztext' ng-bind='option.ItemAttributes[0].Title[0] | limitTo: 100'></p></a>
+        <p class='flow-text' style='text-decoration: underline'>Starting at: <span ng-bind='option.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0]'></span></p>
       </div>
     </div>
   </div>
