@@ -16,8 +16,8 @@ var cors         = require('cors')
 require('./server/config/mongoose.js');
 amazon = require('amazon-product-api');
 var client = amazon.createClient({
-  awsId: "AKIAIXU7Q7BS33F4KYEQ",
-  awsSecret: "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",
+  awsId: "xxxxx",
+  awsSecret: "xxxxx",
   awsTag: "tsuyemura-20"
 });
 
