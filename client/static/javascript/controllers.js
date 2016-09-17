@@ -23,7 +23,7 @@ market_module.controller('streamsController', function($scope, userFactory, stre
     streamFactory.search(game, function(streamer,game){
       if(streamer!='nothing'){
         $scope.streamer = streamer;
-        element.html("<iframe src='http://player.twitch.tv?channel={"+$scope.streamer+"}' height='400' width='100%'  frameborder='0' scrolling='no' allowfullscreen='true'></iframe>")
+        element.html("<iframe src='http://player.twitch.tv?channel={"+$scope.streamer+"}&client_id=4xtcv9zworz1rgi4uqrqj3lzgnc4zyi' height='400' width='100%'  frameborder='0' scrolling='no' allowfullscreen='true'></iframe>")
         $scope.streamgame = game.name
       }
     })

@@ -14,12 +14,12 @@ market_module.factory('streamFactory', function($http, $location){
   var streams = [];
   var factory = {};
   factory.gameSearch = function(search, callback){
-    $http.get('https://api.twitch.tv/kraken/search/games?q=' + search + '&type=suggest').success(function(http){
+    $http.get('https://api.twitch.tv/kraken/search/games?q=' + search + '&type=suggest&client_id=4xtcv9zworz1rgi4uqrqj3lzgnc4zyi').success(function(http){
       callback(http)
     })
   }
   factory.search = function(game, callback){
-    $http.get('https://api.twitch.tv/kraken/streams?game=' + game.name).success(function(http){
+    $http.get('https://api.twitch.tv/kraken/streams?game=' + game.name+"&client_id=4xtcv9zworz1rgi4uqrqj3lzgnc4zyi").success(function(http){
       if(http.streams.length>0){
         callback(http.streams[0].channel.name, game)
       }
