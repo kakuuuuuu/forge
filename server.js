@@ -46,7 +46,7 @@ require('./server/config/routes.js')(app, passport, path, client); // load our r
 // })
 // launch ======================================================================
 app.listen(8000,function(){
-  console.log('Passport test on port 8000')
+  console.log('Passport test on port 8080')
 })
 // var express = require('express');
 // var app = express();
